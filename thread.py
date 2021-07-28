@@ -42,3 +42,16 @@ run_time = time.time() - st
 print('总的耗时:{}s'.format(run_time))
 print('平均每个请求所需要的时间:{}s'.format(run_time / 1000))
 print([r.status_code for thread_obj in list_obj for r in thread_obj.res])
+
+# 异步
+import gevent
+def job(i):
+    print(i)
+    gevent.sleep(2)
+    return i
+g= []
+for _ in range(10):
+    g.append(gevent.spawn(job, i=random.randint(2,100)))
+st = time.time()
+gevent.joinall(g)
+print(time.time() - st)
