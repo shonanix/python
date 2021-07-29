@@ -16,6 +16,7 @@
         - 看到这个镜像名optim:latest即可
     - b. 进行部署(8072为镜像端口)
         ``` shell script
+        docker run --name opt_test -d  --restart always -v /data/test/demo/:/usr/src/app -p 8082:8072  --log-driver json-file --log-opt max-size=10m optim:latest bash -c 'supervisord -c supervisord/supervisord.conf && tail -f logs/logger.log'
           docker run --name con_name -d  --restart always -v /data/test/demo/:/usr/src/app -p 8082:8072 --log-driver json-file --log-opt max-size=10m optim:latest
           docker run --name con_name -d --restart always -v /etc/localtime:/etc/localtime mtg_tk:latest
         ```
@@ -50,3 +51,5 @@ docker start 容器名
  ```shell script
 docker restart 容器名
 ```` 
+- 查看容器日志
+docker logs -f --tail=100  容器名
