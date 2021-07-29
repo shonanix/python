@@ -53,3 +53,17 @@ docker restart 容器名
 ```` 
 - 查看容器日志
 docker logs -f --tail=100  容器名
+
+
+获取依赖库：
+pip freeze > requirements.txt
+pip install -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com --no-cache-dir -r requirements.txt
+
+下载依赖库到your_offline_packages文件夹中：
+pip download -d your_offline_packages -r requirements.txt
+pip download -i https://pypi.tuna.tsinghua.edu.cn/simple -d your_offline_packages -r requirements.txt
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas，这样就会从清华镜像安装pandas库。
+
+安装离线依赖库：
+pip install --no-index --find-links=D:\PROCE\men_tou_gou\your_offline_packages -r requirements.txt
+或者解压后进入安装包C:\Users\樊纲\Downloads\PyInstaller-3.4> python .\setup.py install
