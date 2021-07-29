@@ -34,34 +34,3 @@ def interface(request):
 
     print("解析已完成")
     return result
-
-
-if __name__ == '__main__':
-    interface([
-    {
-        "pid": 1,
-        "part": 3,
-        "aim_value": 50.0,
-        "aim_type": 1,
-        "control_mode": 1,
-        "control_type": 1,
-        "creator": 1
-    },
-    {
-        "pid": 2,
-        "part": 0,
-        "aim_type": 6,
-        "control_mode": 2,
-        "control_type": 2,
-        "creator": 1
-    },
-        {
-            "pid": 3,
-            "part": 0,
-            "aim_type": 2,
-            "aim_value": 50.0,
-            "control_mode": 3,
-            "control_type": 2,
-        "creator": 1
-        }
-])
