@@ -1,4 +1,5 @@
 import sys
+import time
 import threading
 
 
@@ -42,3 +43,38 @@ class KThread(threading.Thread):
 
     def kill(self):
         self.killed = True
+
+class  Fun():     
+    def __init__(self, request):
+        self.event = threading.Event()
+    
+    def func(self):
+        
+        for i in range(100):
+            if self.event.is_set():
+                break
+            print(i)
+            time.slpeep(1)
+            
+    def main(self):
+        self.kt = KThread(target=self.func)
+        self.kt.setDaemon(True)
+        self.kt.start()
+        
+if __name__ == '__main__':
+    demo = Fun()
+    demo.main()
+    i = 0
+    while 1:
+        if i >= 100:
+            # 如果进程有阻塞则
+            # demo.event.set()
+            demo.kt.kill()
+            print("强制结束子进程")
+            break      
+        if demo.kt.is_alive()        
+            print("等待子进程结束中")
+        else:
+            break
+        i = i + 1
+        
