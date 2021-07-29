@@ -67,3 +67,14 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas，这样就会从
 安装离线依赖库：
 pip install --no-index --find-links=D:\PROCE\men_tou_gou\your_offline_packages -r requirements.txt
 或者解压后进入安装包C:\Users\樊纲\Downloads\PyInstaller-3.4> python .\setup.py install
+
+编译pyc
+python -m compileall -b .
+del  /S *.py
+
+打包exe
+pyinstaller -p E:\dll\test_so\venv\Lib\site-packages -F manage.py
+.bat命令开启服务
+.\server\dist\manage.exe runserver 0.0.0.0:8085
+::关闭/杀死进程
+@taskkill /f /IM "ebs2000.exe"
