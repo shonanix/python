@@ -1,0 +1,52 @@
+#### 1. 部署步骤
+ - 在部署服务器上准备以下环境
+    - docker
+ - 本地准备镜像(无镜像的步骤)
+    - a.编写Dockerfile, 创建镜像
+        - 注意，将项目文件demo放置到固定目录，如 ```/data/test```
+        - 将Dockerfile放置到 ```/data/test```, 且进入到该目录```cd /data/test```
+        - 执行如下命令：
+            ```ini
+           docker build -t optim:latest . 
+           ```
+        - 确保镜像创建成功
+            ```shell script
+            docker images
+            ```
+        - 看到这个镜像名optim:latest即可
+    - b. 进行部署(8072为镜像端口)
+        ``` shell script
+          docker run --name con_name -d  --restart always -v /data/test/demo/:/usr/src/app -p 8082:8072 --log-driver json-file --log-opt max-size=10m optim:latest
+          docker run --name con_name -d --restart always -v /etc/localtime:/etc/localtime mtg_tk:latest
+        ```
+ 
+ - 有镜像的步骤
+    - 将镜像保存到本地
+        ```shell script
+          docker save -o optim.tar optim:latest
+          docker save optim:latest | gzip > optim.tar.gz
+        ```
+    - 此时，目录下会有 镜像文件 optim.tar
+    - 将 mtg_tk.tar 拉取到现场， 进行解压
+        ```shell script
+          docker load -i mtg_tk.tar
+          gunzip -c optim.tar.gz | docker load
+        ```
+    - 进行部署
+        ```shell script
+          docker run --name con_name -d  --restart always -v /data/test/demo/:/usr/src/app -p 8082:8072 --log-driver json-file --log-opt max-size=10m optim:latest
+        ```
+
+### 2. docker命令
+ - 停止容器
+ ```shell script
+docker stop 容器名
+```
+- 启动容器
+ ```shell script
+docker start 容器名
+```
+ - 重启容器
+ ```shell script
+docker restart 容器名
+```` 
