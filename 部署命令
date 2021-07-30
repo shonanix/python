@@ -54,6 +54,12 @@ docker restart 容器名
 - 查看容器日志
 docker logs -f --tail=100  容器名
 
+- 进入容器
+docker exec -it 容器名 /bin/bash
+
+- 容器更新镜像
+docker commit 容器ID optim:latest
+
 
 获取依赖库：
 pip freeze > requirements.txt
