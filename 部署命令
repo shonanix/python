@@ -19,6 +19,9 @@
         docker run --name opt_test -d  --restart always -v /data/test/demo/:/usr/src/app -p 8082:8072  --log-driver json-file --log-opt max-size=10m optim:latest bash -c 'supervisord -c supervisord/supervisord.conf && tail -f logs/logger.log'
           docker run --name con_name -d  --restart always -v /data/test/demo/:/usr/src/app -p 8082:8072 --log-driver json-file --log-opt max-size=10m optim:latest
           docker run --name con_name -d --restart always -v /etc/localtime:/etc/localtime mtg_tk:latest
+          docker run  --name con_name -d --restart always -v /data/container/demo/timezone:/etc/timezone  -p 8081:8081 -v /data/container/demo/:/usr/src/app --log-driver   json-file  --log-opt  max-size=10m tk:latest   bash  -c 'python manage.py runserver 0.0.0.0:8081'
+          docker run  --name con_name -d --restart always -v /data/container/demo/timezone:/etc/timezone  -p 8081:8081 -v /data/container/demo/:/usr/src/app --log-driver   json-file  --log-opt  max-size=10m tk:latest   bash  -c 'gunicorn -w 3 -b 0.0.0.0:8081 utils.wsgi:application'
+
         ```
  
  - 有镜像的步骤
@@ -59,6 +62,9 @@ docker exec -it 容器名 /bin/bash
 
 - 容器更新镜像
 docker commit 容器ID optim:latest
+
+- 查看容器进程
+ps -ef
 
 
 获取依赖库：
